@@ -17,24 +17,29 @@ Beta - Version 0.9.1
 ## Usage
 
 Import `i18n-unity-csharp` into the class that you wish to utilize with:
->    using Mgl.Locale;
+    using Mgl.Locale;
 
 Create an instance of the class and call `Configure()`:
->    private I18n i18n = I18n.Instance;
->    ...
->    void Awake()
->    {
->            I18n.Configure();
->    }
+
+    private I18n i18n = I18n.Instance;
+    
+    ...
+    
+    void Awake()
+    {
+            I18n.Configure();
+    }
 
 You can configure a few different settings using:
->    I18n.Configure(
->        string localePath = null       // Unity location for translations, defaults to 'Assets/Resources/Locales/'
->        string defaultLocale = null    // language locale used, defaults to en-US
->        bool logMissing = true         // log missing translations to Debug.Log
->    );
+
+    I18n.Configure(
+        string localePath = null       // Unity location for translations, defaults to 'Assets/Resources/Locales/'
+        string defaultLocale = null    // language locale used, defaults to en-US
+        bool logMissing = true         // log missing translations to Debug.Log
+    );
 
 Some sample JSON:
+
     {
         "Hello": "Hello",
         "Hello %s, how are you today?": "Hello %s, how are you today?",
@@ -68,16 +73,16 @@ Some sample JSON:
 
 Here are some basic examples using the JSON above (more coming soon along with tests):
 
->    Text test = null;
->    test.text = i18n.__("Hello",);
->    test.text = i18n.__("Combo: {0}x", 5);
->    test.text = i18n.__("{0} credits", 0);
->    test.text = i18n.__("{0} credits", 1);
->    test.text = i18n.__("{0} credits", 45);
->    test.text = i18n.__("You found {0} item", 0);
->    test.text = i18n.__("You found {0} item", 1);
->    test.text = i18n.__("You found {0} item", 10);
->    test.text = i18n.__("Score: {0} points", 0);
->    test.text = i18n.__("Score: {0} points", 1);
->    test.text = i18n.__("Score: {0} points", 1000);
->    test.text = i18n.__("Level {1} time: {0}", '00:30:29", "The Cave Level");
+    Text test = null;
+    test.text = i18n.__("Hello",);
+    test.text = i18n.__("Combo: {0}x", 5);
+    test.text = i18n.__("{0} credits", 0);
+    test.text = i18n.__("{0} credits", 1);
+    test.text = i18n.__("{0} credits", 45);
+    test.text = i18n.__("You found {0} item", 0);
+    test.text = i18n.__("You found {0} item", 1);
+    test.text = i18n.__("You found {0} item", 10);
+    test.text = i18n.__("Score: {0} points", 0);
+    test.text = i18n.__("Score: {0} points", 1);
+    test.text = i18n.__("Score: {0} points", 1000);
+    test.text = i18n.__("Level {1} time: {0}", '00:30:29", "The Cave Level");
