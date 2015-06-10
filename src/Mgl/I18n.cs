@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Mgl.Util.SimpleJSON;
+﻿using Lib.SimpleJSON;
 using System.Linq;
 using UnityEngine;
 
