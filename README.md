@@ -6,7 +6,7 @@ Created and used by [Moon Gate Labs](http://moongatelabs.com/)
 It allows developers to utilize multiple languages seamlessly within their Unity projects.
 
 ## Status
-Beta - Version 0.9.1
+Beta - Version 0.9.2
 
 ## Platforms / Technologies
 * [C#](http://en.wikipedia.org/wiki/C_Sharp_programming_language)
