@@ -17,6 +17,7 @@ Beta - Version 0.9.2
 ## Usage
 
 Import `i18n-unity-csharp` into the class that you wish to utilize with:
+
     using Mgl.Locale;
 
 Create an instance of the class and call `Configure()`:
