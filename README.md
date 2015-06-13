@@ -8,7 +8,7 @@ It allows developers to utilize multiple languages seamlessly within their Unity
 It is also able to work outside of Unity projects as a standalone library!
 
 ## Status
-Beta - Version 0.9.2
+Beta - Version 0.9.3
 
 ## Platforms / Technologies
 * [C#](http://en.wikipedia.org/wiki/C_Sharp_programming_language)
