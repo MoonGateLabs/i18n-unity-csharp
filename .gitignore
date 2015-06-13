@@ -1,1 +1,4 @@
 *.meta
+src/packages/
+src/I18nUnity/bin/Debug/
+src/I18nUnity/obj/
