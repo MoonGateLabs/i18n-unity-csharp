@@ -1,6 +1,6 @@
 ﻿using Lib.SimpleJSON;
+using System;
 using System.Linq;
-//using UnityEngine;
 
 namespace Mgl
 {
@@ -120,7 +120,7 @@ namespace Mgl
             // if arguments passed, try to parse first one to use as count
             if (args.Length > 0 && args[0] is int)
             {
-                argOne = (int)args[0];
+                argOne = Math.Abs((int)args[0]);
             }
             // find format to try to use
             switch (argOne)

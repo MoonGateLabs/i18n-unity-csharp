@@ -132,6 +132,10 @@ Zero, one, or other amount (greater than 1)
     // puts: Score: 1 point
     test.text = i18n.__("Score: {0} points", 1000);
     // puts: Score: 1000 points
+    test.text = i18n.__("Score: {0} points", -1);
+    // puts: Score: -1 point
+    test.text = i18n.__("Score: {0} points", -1000);
+    // puts: Score: -1000 points
 
 
 String replacements

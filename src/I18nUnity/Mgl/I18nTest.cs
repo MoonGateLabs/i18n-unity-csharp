@@ -80,7 +80,7 @@
         {
             I18n i18n = I18n.Instance;
             I18n.SetLocale("en-US");
-            Assert.AreEqual("1 credit", i18n.__("{0} credits", -1));
+            Assert.AreEqual("-1 credit", i18n.__("{0} credits", -1));
         }
 
         [Test]
@@ -96,7 +96,7 @@
         {
             I18n i18n = I18n.Instance;
             I18n.SetLocale("en-US");
-            Assert.AreEqual("15 credits", i18n.__("{0} credits", -15));
+            Assert.AreEqual("-15 credits", i18n.__("{0} credits", -15));
         }
 
         [Test]
@@ -149,5 +149,15 @@
             I18n.SetLocale("en-US");
             Assert.AreEqual("There are 27 monkeys in the tree!", i18n.__("There is one monkey in the {1}", 27, "tree"));
         }
+
+        [Test]
+        public void TestNegativeMultipleMonkeys()
+        {
+            // why would you have negative monkeys? well who cares - we need to test it anyways!
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("There are -5 monkeys in the tree!", i18n.__("There is one monkey in the {1}", -5, "tree"));
+        }
+
     }
 }
