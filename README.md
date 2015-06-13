@@ -67,6 +67,11 @@ Some sample JSON:
         "Hello": "Hello",
         "Hello {0}, how are you today?": "Hello {0}, how are you today?",
         "Combo: {0}x": "Combo {0}x",
+        "You have one cat": {
+            "zero": "You have no cats",
+            "one": "You have one cat",
+            "other": "You have a lot of cats!"
+        },
         "You found {0} item": {
             "zero": "No items found",
             "one": "You found one item",
@@ -99,7 +104,6 @@ Some sample JSON:
 
 Here are some basic examples using the JSON above, you can also review the unit tests in `I18nTest` for more examples.
 
-
 Assuming you are using Unity - *although this works without Unity* as well!
     
     Text test = null;
@@ -108,8 +112,17 @@ Assuming you are using Unity - *although this works without Unity* as well!
     test.text = i18n.__("Combo: {0}x", 5);
     // puts: Combo: 5x
 
+Zero, one, or 'other' amount (greater than 1 or less than -1)
 
-Zero, one, or other amount (greater than 1)
+    string message;
+    message = i18n.__("You have one cat", 0);
+    // puts: You have no cats
+    message = i18n.__("You have one cat", 1);
+    // puts: You have one cat
+    message = i18n.__("You have one cat", 45);
+    // puts: You have a lot of cats!
+
+Replacements using zero, one, or 'other' amount (greater than 1 or less than -1)
 
     Text test = null;
     test.text = i18n.__("{0} credits", 0);
