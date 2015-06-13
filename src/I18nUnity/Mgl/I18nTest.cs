@@ -92,6 +92,14 @@
         }
 
         [Test]
+        public void TestFloatNearZero()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("0.34 credits", i18n.__("{0} credits", 0.34));
+        }
+
+        [Test]
         public void TestOne()
         {
             I18n i18n = I18n.Instance;
