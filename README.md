@@ -107,7 +107,7 @@ Here are some basic examples using the JSON above, you can also review the unit 
 Assuming you are using Unity - *although this works without Unity* as well!
     
     Text test = null;
-    test.text = i18n.__("Hello",);
+    test.text = i18n.__("Hello");
     // puts: Hello
     test.text = i18n.__("Combo: {0}x", 5);
     // puts: Combo: 5x
