@@ -76,11 +76,27 @@
         }
 
         [Test]
+        public void TestNegativeOne()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("1 credit", i18n.__("{0} credits", -1));
+        }
+
+        [Test]
         public void TestOther()
         {
             I18n i18n = I18n.Instance;
             I18n.SetLocale("en-US");
             Assert.AreEqual("15 credits", i18n.__("{0} credits", 15));
+        }
+
+        [Test]
+        public void TestNegativeOther()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("15 credits", i18n.__("{0} credits", -15));
         }
 
         [Test]
