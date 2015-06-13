@@ -131,6 +131,8 @@ Replacements using zero, one, or 'other' amount (greater than 1 or less than -1)
     // puts: 1 credit
     test.text = i18n.__("{0} credits", 45);
     // puts: 45 credits
+    test.text = i18n.__("{0} credits", 15.23);
+    // puts: 15.23 credits
     
     test.text = i18n.__("You found {0} item", 0);
     // puts: No items found

@@ -60,6 +60,30 @@
         }
 
         [Test]
+        public void TestZeroNoReplacements()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("You have no cats", i18n.__("You have one cat", 0));
+        }
+
+        [Test]
+        public void TestOneNoReplacements()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("You have one cat", i18n.__("You have one cat", 1));
+        }
+
+        [Test]
+        public void TestOtherNoReplacements()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("You have a lot of cats!", i18n.__("You have one cat", 11));
+        }
+
+        [Test]
         public void TestZero()
         {
             I18n i18n = I18n.Instance;
@@ -73,6 +97,14 @@
             I18n i18n = I18n.Instance;
             I18n.SetLocale("en-US");
             Assert.AreEqual("1 credit", i18n.__("{0} credits", 1));
+        }
+
+        [Test]
+        public void TestFloat()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("1.23 credits", i18n.__("{0} credits", 1.23));
         }
 
         [Test]
@@ -92,11 +124,27 @@
         }
 
         [Test]
+        public void TestOtherFloat()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("15.23 credits", i18n.__("{0} credits", 15.23));
+        }
+
+        [Test]
         public void TestNegativeOther()
         {
             I18n i18n = I18n.Instance;
             I18n.SetLocale("en-US");
             Assert.AreEqual("-15 credits", i18n.__("{0} credits", -15));
+        }
+
+        [Test]
+        public void TestNegativeOtherFloat()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.SetLocale("en-US");
+            Assert.AreEqual("-15.23 credits", i18n.__("{0} credits", -15.23));
         }
 
         [Test]

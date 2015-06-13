@@ -118,9 +118,14 @@ namespace Mgl
             int argOne = 0;
             JSONClass translationOptions = config[key].AsObject;
             // if arguments passed, try to parse first one to use as count
-            if (args.Length > 0 && args[0] is int)
+            if (args.Length > 0 && IsNumeric(args[0]))
             {
-                argOne = Math.Abs((int)args[0]);
+                argOne = Math.Abs(Convert.ToInt32(args[0]));
+                if (argOne == 1 && Math.Abs(Convert.ToDouble(args[0])) != 1)
+                {
+                    // check if arg actually equals one
+                    argOne = 2;
+                }
             }
             // find format to try to use
             switch (argOne)
@@ -145,6 +150,17 @@ namespace Mgl
                 System.Console.WriteLine("Missing singPlurKey:" + singPlurKey + " for:" + key);
             }
             return translation;
+        }
+
+        bool IsNumeric(System.Object Expression)
+        {
+            if (Expression == null || Expression is DateTime)
+                return false;
+
+            if (Expression is Int16 || Expression is Int32 || Expression is Int64 || Expression is Decimal || Expression is Single || Expression is Double || Expression is Boolean)
+                return true;
+
+            return false;
         }
 
     }
