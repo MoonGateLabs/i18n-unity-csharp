@@ -1,0 +1,20 @@
+{
+    "Hello": "Hello",
+    "Hello {0}, how are you today?": "Hello {0}, how are you today?",
+    "You have one cat": {
+        "zero": "You have no cats",
+        "one": "You have one cat",
+        "other": "You have a lot of cats!"
+    },
+    "{0} credits": {
+        "zero": "No credits",
+        "one": "{0} credit",
+        "other": "{0} credits"
+    },
+    "Level {1} time: {0} score:{3} ammo:{4} player:{2}": "Level {1} time: {0} score:{3} ammo:{4} player:{2}",
+    "There is one monkey in the {1}": {
+        "zero": "There are no monkeys in the {1}.",
+        "one": "There is one monkey in the {1}.",
+        "other": "There are {0} monkeys in the {1}!"
+    }
+}
