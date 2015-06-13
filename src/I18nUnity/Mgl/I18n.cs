@@ -1,18 +1,18 @@
 ﻿using Lib.SimpleJSON;
+using System;
 using System.Linq;
-using UnityEngine;
 
 namespace Mgl
 {
     sealed class I18n
     {
-        private static JSONNode config;
+        private static JSONNode config = null;
 
         private static readonly I18n instance = new I18n();
 
         private static string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
 
-        private static string _defaultLocale = "en-US";
+        private static string _currentLocale = "en-US";
 
         private static string _extension = ".json";
 
@@ -38,9 +38,9 @@ namespace Mgl
 
         static void InitConfig()
         {
-            if (locales.Contains(_defaultLocale))
+            if (locales.Contains(_currentLocale))
             {
-                string localConfigPath = _localePath + _defaultLocale + _extension;
+                string localConfigPath = _localePath + _currentLocale + _extension;
                 // Read the file as one string.
                 System.IO.StreamReader configFile = new System.IO.StreamReader(localConfigPath);
                 string configString = configFile.ReadToEnd();
@@ -49,21 +49,38 @@ namespace Mgl
             }
             else if (_isLoggingMissing)
             {
-                Debug.Log("Missing: locale [" + _defaultLocale + "] not found in supported list");
+                System.Console.WriteLine("Missing: locale [" + _currentLocale + "] not found in supported list");
             }
         }
 
-        public static void Configure(string localePath = null, string defaultLocale = null, bool logMissing = true)
+        public static string GetLocale()
         {
-            _isLoggingMissing = logMissing;
+            return _currentLocale;
+        }
+
+        public static void SetLocale(string newLocale = null)
+        {
+            if (newLocale != null)
+            {
+                _currentLocale = newLocale;
+                InitConfig();
+            }
+        }
+
+        public static void SetPath(string localePath = null)
+        {
             if (localePath != null)
             {
                 _localePath = localePath;
+                InitConfig();
             }
-            if (defaultLocale != null)
-            {
-                _defaultLocale = defaultLocale;
-            }
+        }
+
+        public static void Configure(string localePath = null, string newLocale = null, bool logMissing = true)
+        {
+            _isLoggingMissing = logMissing;
+            SetPath(localePath);
+            SetLocale(newLocale);
             InitConfig();
         }
 
@@ -89,24 +106,18 @@ namespace Mgl
             }
             else if (_isLoggingMissing)
             {
-                Debug.Log("Missing translation for:" + key);
+                System.Console.WriteLine("Missing translation for:" + key);
             }
             return translation;
         }
 
         string FindSingularOrPlural(string key, object[] args)
         {
+            JSONClass translationOptions = config[key].AsObject;
             string translation = key;
             string singPlurKey;
-            int argOne = 0;
-            JSONClass translationOptions = config[key].AsObject;
-            // if arguments passed, try to parse first one to use as count
-            if (args.Length > 0 && args[0] is int)
-            {
-                argOne = (int)args[0];
-            }
             // find format to try to use
-            switch (argOne)
+            switch (GetCountAmount(args))
             {
                 case 0:
                     singPlurKey = "zero";
@@ -125,9 +136,41 @@ namespace Mgl
             }
             else if (_isLoggingMissing)
             {
-                Debug.Log("Missing singPlurKey:" + singPlurKey + " for:" + key);
+                System.Console.WriteLine("Missing singPlurKey:" + singPlurKey + " for:" + key);
             }
             return translation;
+        }
+
+        int GetCountAmount(object[] args)
+        {
+            int argOne = 0;
+            // if arguments passed, try to parse first one to use as count
+            if (args.Length > 0 && IsNumeric(args[0]))
+            {
+                argOne = Math.Abs(Convert.ToInt32(args[0]));
+                if (argOne == 1 && Math.Abs(Convert.ToDouble(args[0])) != 1)
+                {
+                    // check if arg actually equals one
+                    argOne = 2;
+                }
+                else if (argOne == 0 && Math.Abs(Convert.ToDouble(args[0])) != 0)
+                {
+                    // check if arg actually equals one
+                    argOne = 2;
+                }
+            }
+            return argOne;
+        }
+
+        bool IsNumeric(System.Object Expression)
+        {
+            if (Expression == null || Expression is DateTime)
+                return false;
+
+            if (Expression is Int16 || Expression is Int32 || Expression is Int64 || Expression is Decimal || Expression is Single || Expression is Double || Expression is Boolean)
+                return true;
+
+            return false;
         }
 
     }
