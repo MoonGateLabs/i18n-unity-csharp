@@ -22,6 +22,7 @@ namespace Mgl
 
         static I18n()
         {
+            InitConfig();
         }
 
         private I18n()
