@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Mgl
 {
-    sealed class I18n
+    public sealed class I18n
     {
         private static JSONNode config = null;
 
