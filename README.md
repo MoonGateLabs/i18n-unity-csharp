@@ -8,7 +8,7 @@ It allows developers to utilize multiple languages seamlessly within their Unity
 It is also able to work outside of Unity projects as a standalone library!
 
 ## Status
-Beta - Version 0.9.2
+Beta - Version 0.9.3
 
 ## Platforms / Technologies
 * [C#](http://en.wikipedia.org/wiki/C_Sharp_programming_language)
@@ -107,7 +107,7 @@ Here are some basic examples using the JSON above, you can also review the unit 
 Assuming you are using Unity - *although this works without Unity* as well!
     
     Text test = null;
-    test.text = i18n.__("Hello",);
+    test.text = i18n.__("Hello");
     // puts: Hello
     test.text = i18n.__("Combo: {0}x", 5);
     // puts: Combo: 5x
