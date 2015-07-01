@@ -8,7 +8,7 @@ It allows developers to utilize multiple languages seamlessly within their Unity
 It is also able to work outside of Unity projects as a standalone library!
 
 ## Status
-Beta - Version 0.9.2
+Beta - Version 0.9.4
 
 ## Platforms / Technologies
 * [C#](http://en.wikipedia.org/wiki/C_Sharp_programming_language)
@@ -21,15 +21,15 @@ Beta - Version 0.9.2
 Import `i18n-unity-csharp` into the class that you wish to utilize with:
     using Mgl.Locale;
 
-Create an instance of the class and call `Configure()`:
+Create an instance of the class and be sure to only use it in methods after the Start() period occurs - do not call from within Awake():
 
     private I18n i18n = I18n.Instance;
     
     ...
     
-    void Awake()
+    void Start()
     {
-            I18n.Configure();
+			 string hW = i18n.__("Hello World!");
     }
 
 Your translation files must be in JSON compliant format and be named according to their language and variant.
@@ -107,7 +107,7 @@ Here are some basic examples using the JSON above, you can also review the unit 
 Assuming you are using Unity - *although this works without Unity* as well!
     
     Text test = null;
-    test.text = i18n.__("Hello",);
+    test.text = i18n.__("Hello");
     // puts: Hello
     test.text = i18n.__("Combo: {0}x", 5);
     // puts: Combo: 5x
