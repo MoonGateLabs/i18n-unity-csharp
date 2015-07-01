@@ -1,5 +1,6 @@
 ﻿using Lib.SimpleJSON;
 using System;
+using UnityEngine;
 using System.Linq;
 
 namespace Mgl
@@ -14,15 +15,13 @@ namespace Mgl
 
         private static string _currentLocale = "en-US";
 
-        private static string _extension = ".json";
-
-        private static string _localePath = "Assets/Resources/Locales/";
+        private static string _localePath = "Locales/";
 
         private static bool _isLoggingMissing = true;
 
         static I18n()
         {
-            InitConfig();
+           
         }
 
         private I18n()
@@ -41,16 +40,14 @@ namespace Mgl
         {
             if (locales.Contains(_currentLocale))
             {
-                string localConfigPath = _localePath + _currentLocale + _extension;
+                string localConfigPath = _localePath + _currentLocale;
                 // Read the file as one string.
-                System.IO.StreamReader configFile = new System.IO.StreamReader(localConfigPath);
-                string configString = configFile.ReadToEnd();
-                configFile.Close();
-                config = JSON.Parse(configString);
+                TextAsset configText = Resources.Load(localConfigPath) as TextAsset;
+                config = JSON.Parse(configText.text);
             }
             else if (_isLoggingMissing)
             {
-                System.Console.WriteLine("Missing: locale [" + _currentLocale + "] not found in supported list");
+                Debug.Log("Missing: locale [" + _currentLocale + "] not found in supported list");
             }
         }
 
@@ -87,6 +84,10 @@ namespace Mgl
 
         public string __(string key, params object[] args)
         {
+            if (config == null)
+            {
+                InitConfig();
+            }
             string translation = key;
             if (config[key] != null)
             {
@@ -107,7 +108,7 @@ namespace Mgl
             }
             else if (_isLoggingMissing)
             {
-                System.Console.WriteLine("Missing translation for:" + key);
+                Debug.Log("Missing translation for:" + key);
             }
             return translation;
         }
@@ -137,7 +138,7 @@ namespace Mgl
             }
             else if (_isLoggingMissing)
             {
-                System.Console.WriteLine("Missing singPlurKey:" + singPlurKey + " for:" + key);
+                Debug.Log("Missing singPlurKey:" + singPlurKey + " for:" + key);
             }
             return translation;
         }
