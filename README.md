@@ -19,6 +19,7 @@ Beta - Version 0.9.4
 ## Usage - setup and configuration
 
 Import `i18n-unity-csharp` into the class that you wish to utilize with:
+
     using Mgl.Locale;
 
 Create an instance of the class and be sure to only use it in methods after the Start() period occurs - do not call from within Awake():
@@ -46,12 +47,12 @@ Your translation files must be in JSON compliant format and be named according t
 You can configure a few different settings using `Configure()`:
 
     I18n.Configure(
-        string localePath = null       // Unity location for translations, defaults to 'Assets/Resources/Locales/'
+        string localePath = null       // Unity location for translations defaults to 'Locales' inside of 'Assets/Resources/Locales/'
         string defaultLocale = null    // language locale used, defaults to en-US
         bool logMissing = true         // log missing translations
     );
 
-You can change the path directly using the `SetPath()` function, although we recommend using the default `Assets/Resources/Locales/` path:
+You can change the path directly using the `SetPath()` function, although we recommend using the default path:
 
     I18n.SetPath("Locales/");
 
