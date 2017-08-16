@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Mgl
 {
-    public sealed class I18n
+    public class I18n
     {
         private static JSONNode config = null;
 
-        private static readonly I18n instance = new I18n();
+        protected static readonly I18n instance = new I18n();
 
-        private static string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
+        protected static string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
 
         private static string _currentLocale = "en-US";
 
@@ -24,7 +24,7 @@ namespace Mgl
            
         }
 
-        private I18n()
+        protected I18n()
         {
         }
 
