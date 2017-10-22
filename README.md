@@ -23,7 +23,7 @@ Beta - Version 0.9.4
 
 1. Copy `I18nUnity` folder to your Unity3D project's `Assets` folder (or anywhere else Unity can see it will work)
 
-2. Create a `class` (ex: in `Assets/Scripts`) that will _subclass_ `I18n` so you can customize you language list:
+2. Create your own `I18n` class (ex: in `Assets/Scripts`) that will _subclass_ `Mgl.I18n` so you can specify your own locales:
 
 ```csharp
 // Replace MyApp with your own namespace
