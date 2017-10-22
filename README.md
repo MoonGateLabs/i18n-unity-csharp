@@ -207,3 +207,7 @@ I18n.SetLocale("fr-FR");
 System.Console.WriteLine(i18n.__("Hello"));
 // outputs: Bonjour
 ```
+
+## License
+
+[MIT](LICENSE.md) © [Cameron Manavian](https://github.com/camsjams)
