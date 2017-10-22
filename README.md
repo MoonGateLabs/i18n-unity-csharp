@@ -1,4 +1,5 @@
 # i18n-unity-csharp
+
 Lightweight internationalization for use with C#, uses common `__('...')` syntax.
 
 Created and used by [Moon Gate Labs](http://moongatelabs.com/)
@@ -8,9 +9,11 @@ It allows developers to utilize multiple languages seamlessly within their Unity
 It is also able to work outside of Unity projects as a standalone library!
 
 ## Status
+
 Beta - Version 0.9.4
 
 ## Platforms / Technologies
+
 * [C#](http://en.wikipedia.org/wiki/C_Sharp_programming_language)
 * [JSON](http://json.org/)
 * [Unity](https://unity3d.com/)
