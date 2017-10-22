@@ -1,12 +1,12 @@
 # i18n-unity-csharp
 
-Lightweight internationalization for use with C#, uses common `__('...')` syntax.
+Lightweight internationalization for use with C#, uses common [`__('...')` gettext](https://www.gnu.org/software/gettext/manual/gettext.html) syntax.
 
 Created and used by [Moon Gate Labs](http://moongatelabs.com/)
 
 It allows developers to utilize multiple languages seamlessly within their Unity projects.
 
-It is also able to work outside of Unity projects as a standalone library!
+<del>It is also able to work outside of Unity projects as a standalone library!</del> See [#4](https://github.com/MoonGateLabs/i18n-unity-csharp/issues/4)
 
 ## Status
 
@@ -19,22 +19,47 @@ Beta - Version 0.9.4
 * [Unity](https://unity3d.com/)
 * [Unity SimpleJSON](http://wiki.unity3d.com/index.php/SimpleJSON)
 
-## Usage - setup and configuration
+## Usage - Setup and configuration
 
-###
+1. Copy `I18nUnity` folder to your Unity3D project's `Assets` folder (or anywhere else Unity can see it will work)
 
-Import `i18n-unity-csharp` into the class that you wish to utilize with:
+2. Create a `class` (ex: in `Assets/Scripts`) that will _subclass_ `I18n` so you can customize you language list:
 
 ```csharp
-using Mgl.Locale;
+// Replace MyApp with your own namespace
+namespace MyApp {
+  public class I18n : Mgl.I18n {
+    protected static readonly I18n instance = new I18n();
+
+    // Customize your languages here
+    protected static string[] locales = new string[] {
+      "en-US",
+      "fr-FR",
+      "es-ES",
+      "de-DE"
+    };
+
+    public static I18n Instance {
+      get {
+        return instance;
+      }
+    }
+  }
+}
 ```
 
-Create an instance of the class and be sure to only use it in methods after the Start() period occurs - do not call from within Awake():
+You can now use `I18n` by adding your namespace (in the following example, `MyApp`).
+
+```csharp
+using MyApp;
+```
+
+3. Create an instance of the class and be sure to only use it in methods after the `Start()` period occurs - do not call from within `Awake()`:
 
 ```csharp
 private I18n i18n = I18n.Instance;
 
-...
+// ...
 
 void Start()
 {
@@ -42,7 +67,7 @@ void Start()
 }
 ```
 
-Your translation files must be in JSON compliant format and be named according to their language and variant.
+4. Your translation files must be in JSON compliant format and be named according to their language and variant.
 
 ```
 [project-root]
@@ -54,6 +79,8 @@ Your translation files must be in JSON compliant format and be named according t
                 es-ES.json
                 fr-FR.json
 ```
+
+## Usage - Optional configuration
 
 You can configure a few different settings using `Configure()`:
 
