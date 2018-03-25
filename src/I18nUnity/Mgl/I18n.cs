@@ -58,27 +58,23 @@ namespace Mgl
 
         public static void SetLocale(string newLocale = null)
         {
-            if (newLocale != null)
-            {
-                _currentLocale = newLocale;
-                InitConfig();
-            }
+            Configure (_localePath, newLocale, _isLoggingMissing);
         }
 
         public static void SetPath(string localePath = null)
         {
-            if (localePath != null)
-            {
-                _localePath = localePath;
-                InitConfig();
-            }
+            Configure (localePath, _currentLocale, _isLoggingMissing);
         }
 
         public static void Configure(string localePath = null, string newLocale = null, bool logMissing = true)
         {
+            if (localePath != null) {
+                _localePath = localePath;
+            }
+            if (newLocale != null) {
+                _currentLocale = newLocale;
+            }
             _isLoggingMissing = logMissing;
-            SetPath(localePath);
-            SetLocale(newLocale);
             InitConfig();
         }
 
