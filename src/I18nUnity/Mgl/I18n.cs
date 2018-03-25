@@ -7,7 +7,7 @@ namespace Mgl
 {
     public class I18n
     {
-        private static JSONNode config = null;
+		private static JSONNode translationData = null;
 
         protected static readonly I18n instance = new I18n();
 
@@ -43,7 +43,7 @@ namespace Mgl
                 string localConfigPath = _localePath + _currentLocale;
                 // Read the file as one string.
                 TextAsset configText = Resources.Load(localConfigPath) as TextAsset;
-                config = JSON.Parse(configText.text);
+                translationData = JSON.Parse(configText.text);
             }
             else if (_isLoggingMissing)
             {
@@ -80,17 +80,17 @@ namespace Mgl
 
         public string __(string key, params object[] args)
         {
-            if (config == null)
+            if (translationData == null)
             {
                 InitConfig();
             }
             string translation = key;
-            if (config[key] != null)
+            if (translationData[key] != null)
             {
                 // if this key is a direct string
-                if (config[key].Count == 0)
+                if (translationData[key].Count == 0)
                 {
-                    translation = config[key];
+                    translation = translationData[key];
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace Mgl
 
         string FindSingularOrPlural(string key, object[] args)
         {
-            JSONClass translationOptions = config[key].AsObject;
+            JSONClass translationOptions = translationData[key].AsObject;
             string translation = key;
             string singPlurKey;
             // find format to try to use
