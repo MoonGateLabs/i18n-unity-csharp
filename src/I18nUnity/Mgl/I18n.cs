@@ -7,7 +7,7 @@ namespace Mgl
 {
     public class I18n
     {
-		private static JSONNode translationData = null;
+        private static JSONNode translationData = null;
 
         protected static readonly I18n instance = new I18n();
 
@@ -58,15 +58,15 @@ namespace Mgl
 
         public static void SetLocale(string newLocale = null)
         {
-            Configure (_localePath, newLocale, _isLoggingMissing);
+            Configure (newLocale: newLocale);
         }
 
         public static void SetPath(string localePath = null)
         {
-            Configure (localePath, _currentLocale, _isLoggingMissing);
+            Configure (localePath: localePath);
         }
 
-        public static void Configure(string localePath = null, string newLocale = null, bool logMissing = true)
+        public static void Configure(string localePath = null, string newLocale = null, bool? logMissing = null, string[] locales = null)
         {
             if (localePath != null) {
                 _localePath = localePath;
@@ -74,7 +74,12 @@ namespace Mgl
             if (newLocale != null) {
                 _currentLocale = newLocale;
             }
-            _isLoggingMissing = logMissing;
+            if (logMissing.HasValue) {
+                _isLoggingMissing = logMissing.Value;
+            }
+            if (locales != null) {
+                I18n.locales = (string[])locales.Clone ();
+            }
             InitConfig();
         }
 

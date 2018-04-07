@@ -16,7 +16,7 @@
         public void Init()
         {
             I18n i18n = I18n.Instance;
-            I18n.Configure("Locales/", "en-US");
+            I18n.Configure(localePath: "Locales/", newLocale: "en-US", logMissing: true, locales: new string[] { "en-US", "fr-FR", "es-ES" });
         }
 
 
@@ -43,6 +43,15 @@
 
             I18n.SetLocale("en-US");
             Assert.AreEqual("en-US", I18n.GetLocale());
+        }
+
+        [Test]
+        public void TestConfigureLocales()
+        {
+            I18n i18n = I18n.Instance;
+            I18n.Configure (newLocale: "de-DE", locales: new string[] { "en-US", "de-DE" });
+            Assert.AreEqual("de-DE", I18n.GetLocale());
+            Assert.AreEqual("Hallo", i18n.__ ("Hello"));
         }
 
         [Test]
