@@ -7,25 +7,16 @@ namespace Mgl
 {
     public class I18n
     {
-        private static JSONNode translationData = null;
-
-        protected static readonly I18n instance = new I18n();
-
-        protected static string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
-
-        private static string _currentLocale = "en-US";
-
-        private static string _localePath = "Locales/";
-
-        private static bool _isLoggingMissing = true;
+        static I18n instance = new I18n();
+        private JSONNode translationData = null;
+        protected string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
+        private string _currentLocale = "en-US";
+        private string _localePath = "Locales/";
+        private bool _isLoggingMissing = true;
 
         static I18n()
         {
            
-        }
-
-        protected I18n()
-        {
         }
 
         public static I18n Instance
@@ -36,7 +27,12 @@ namespace Mgl
             }
         }
 
-        static void InitConfig()
+        public static void Reset(I18n newInstance)
+        {
+            instance = newInstance;
+        }
+
+        void InitConfig()
         {
             if (locales.Contains(_currentLocale))
             {
@@ -53,20 +49,20 @@ namespace Mgl
 
         public static string GetLocale()
         {
-            return _currentLocale;
+            return instance._currentLocale;
         }
 
         public static void SetLocale(string newLocale = null)
         {
-            Configure (newLocale: newLocale);
+            instance.Configure (newLocale: newLocale);
         }
 
         public static void SetPath(string localePath = null)
         {
-            Configure (localePath: localePath);
+            instance.Configure (localePath: localePath);
         }
 
-        public static void Configure(string localePath = null, string newLocale = null, bool? logMissing = null, string[] locales = null)
+        public void Configure(string localePath = null, string newLocale = null, bool? logMissing = null, string[] locales = null)
         {
             if (localePath != null) {
                 _localePath = localePath;
@@ -78,9 +74,14 @@ namespace Mgl
                 _isLoggingMissing = logMissing.Value;
             }
             if (locales != null) {
-                I18n.locales = (string[])locales.Clone ();
+                this.locales = (string[])locales.Clone ();
             }
             InitConfig();
+        }
+
+        public static string t(string key, params object[] args)
+        {
+            return instance.__ (key, args);
         }
 
         public string __(string key, params object[] args)
